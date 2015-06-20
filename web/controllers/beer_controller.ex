@@ -7,8 +7,8 @@ defmodule ApiScaffold.BeerController do
   plug :action
 
   def index(conn, _params) do
-    Beers = Repo.all(Beer)
-    render(conn, "index.json", Beers: Beers)
+    beers = Repo.all(Beer)
+    render(conn, "index.json", beers: beers)
   end
 
   def create(conn, %{"beer" => beer_params}) do
