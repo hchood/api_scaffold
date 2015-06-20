@@ -10,6 +10,11 @@ defmodule ApiScaffold.BeerView do
   end
 
   def render("beer.json", %{beer: beer}) do
-    %{id: beer.id}
+    %{
+      id: beer.id,
+      name: beer.name,
+      description: beer.description,
+      abv: beer.abv
+    }
   end
 end
