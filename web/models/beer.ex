@@ -9,8 +9,8 @@ defmodule ApiScaffold.Beer do
     timestamps
   end
 
-  @required_fields ~w(name description abv)
-  @optional_fields ~w()
+  @required_fields ~w(name)
+  @optional_fields ~w(description abv)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
