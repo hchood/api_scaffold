@@ -2,8 +2,8 @@ defmodule ApiScaffold.BeerControllerTest do
   use ApiScaffold.ConnCase
 
   alias ApiScaffold.Beer
-  @valid_attrs %{abv: 42, description: "some content", name: "some content"}
-  @invalid_attrs %{}
+  @valid_attrs %{abv: 42, description: "derpy beer", name: "derp"}
+  @invalid_attrs %{name: ""}
 
   setup do
     conn = conn() |> put_req_header("accept", "application/json")
@@ -16,10 +16,14 @@ defmodule ApiScaffold.BeerControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    beer = Repo.insert %Beer{}
+    beer = Beer.changeset(%Beer{}, @valid_attrs)
+    |> Repo.insert
     conn = get conn, beer_path(conn, :show, beer)
     assert json_response(conn, 200)["data"] == %{
-      "id" => beer.id
+      "id" => beer.id,
+      "name" => "derp",
+      "description" => "derpy beer",
+      "abv" => 42
     }
   end
 
@@ -35,20 +39,24 @@ defmodule ApiScaffold.BeerControllerTest do
   end
 
   test "updates and renders chosen resource when data is valid", %{conn: conn} do
-    beer = Repo.insert %Beer{}
-    conn = put conn, beer_path(conn, :update, beer), beer: @valid_attrs
+    new_attrs = %{description: "now with more derp"}
+    beer = Beer.changeset(%Beer{}, @valid_attrs)
+    |> Repo.insert
+    conn = put conn, beer_path(conn, :update, beer), beer: new_attrs
     assert json_response(conn, 200)["data"]["id"]
-    assert Repo.get_by(Beer, @valid_attrs)
+    assert Repo.get_by(Beer, %{abv: 42, description: "now with more derp", name: "derp"})
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    beer = Repo.insert %Beer{}
+    beer = Beer.changeset(%Beer{}, @valid_attrs)
+    |> Repo.insert
     conn = put conn, beer_path(conn, :update, beer), beer: @invalid_attrs
     assert json_response(conn, 422)["errors"] != %{}
   end
 
   test "deletes chosen resource", %{conn: conn} do
-    beer = Repo.insert %Beer{}
+    beer = Beer.changeset(%Beer{}, @valid_attrs)
+    |> Repo.insert
     conn = delete conn, beer_path(conn, :delete, beer)
     assert json_response(conn, 200)["data"]["id"]
     refute Repo.get(Beer, beer.id)
