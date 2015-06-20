@@ -3,12 +3,11 @@ defmodule ApiScaffold.Repo.Migrations.CreateBeer do
 
   def change do
     create table(:beers) do
-      add :name, :string
+      add :name, :string, null: false
       add :description, :text
       add :abv, :integer
 
       timestamps
     end
-
   end
 end

@@ -29,7 +29,5 @@ config :logger, :console, format: "[$level] $message\n"
 # Configure your database
 config :api_scaffold, ApiScaffold.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
   database: "api_scaffold_dev",
   size: 10 # The amount of database connections in the pool
