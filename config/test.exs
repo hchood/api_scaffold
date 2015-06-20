@@ -12,7 +12,5 @@ config :logger, level: :warn
 # Configure your database
 config :api_scaffold, ApiScaffold.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
   database: "api_scaffold_test",
   size: 1 # Use a single connection for transactional tests
