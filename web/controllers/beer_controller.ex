@@ -13,8 +13,7 @@ defmodule ApiScaffold.BeerController do
 
   def create(conn, %{"beer" => beer_params}) do
     changeset = Beer.changeset(%Beer{}, beer_params)
-# require IEx
-# IEx.pry
+
     if changeset.valid? do
       beer = Repo.insert(changeset)
       render(conn, "show.json", beer: beer)
