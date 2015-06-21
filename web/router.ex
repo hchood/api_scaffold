@@ -10,5 +10,6 @@ defmodule ApiScaffold.Router do
     pipe_through :api
 
     resources "/beers", BeerController
+    resources "/pull_requests", PullRequestController
   end
 end

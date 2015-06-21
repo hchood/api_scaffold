@@ -29,7 +29,8 @@ defmodule ApiScaffold.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.13.1"},
+    [{:ecto, "0.12.0-rc"},
+     {:phoenix, "~> 0.13.1"},
      {:phoenix_ecto, "~> 0.4"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 1.0"},
